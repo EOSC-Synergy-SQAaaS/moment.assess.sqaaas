@@ -1,0 +1,52 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.0
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/moment/moment:
+      branch: develop
+      repo: https://github.com/moment/moment
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/moment/moment git:
+        commands:
+        - /usr/bin/env sh .sqa/script.scaly-eggplant-horse.sh
+        container: qc.acc_jumpy-cerise-tiger
+  QC.Doc:
+    repos:
+      github.com/moment/moment find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.wheezy-zucchini-angora.sh
+        container: qc.doc_crappy-dandelion-dhole
+      github.com/moment/moment git:
+        commands:
+        - /usr/bin/env sh .sqa/script.sloppy-blue-chihuahua.sh
+        container: qc.doc_craggy-teal-beagle
+      github.com/moment/moment markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.fuzzy-corn-hound.sh
+        container: qc.doc_surly-cerise-tetra
+  QC.FAIR:
+    repos:
+      github.com/moment/moment F-UJI:
+        commands:
+        - /usr/bin/env sh .sqa/script.baggy-wisteria-lemur.sh
+        container: qc.fair_shaggy-chocolate-indri
+  QC.Lic:
+    repos:
+      github.com/moment/moment licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaky-viridian-ostrich.sh
+        container: qc.lic_lousy-bronze-audemer
+  QC.Ver:
+    repos:
+      github.com/moment/moment get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.messy-lime-discus.sh
+        container: qc.ver_randy-magnolia-squid
+timeout: 1800
